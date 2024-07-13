@@ -19,16 +19,17 @@
 - has_many :orders
 
 ## items table
-| Column           | Type    | Options     |
-|------------------|---------|-------------|
-| name             | string  | null: false |
-| text             | text    | null: false |
-| category_id      | integer | null: false |
-| condition_id     | integer | null: false |
-| shipping_id      | integer | null: false |
-| area_id          | integer | null: false |
-| delivery_time_id | integer | null: false |
-| price            | integer | null: false |
+| Column           | Type       | Options     |
+|------------------|------------|-------------|
+| name             | string     | null: false |
+| text             | text       | null: false |
+| category_id      | integer    | null: false |
+| condition_id     | integer    | null: false |
+| shipping_id      | integer    | null: false |
+| prefectures_id   | integer    | null: false |
+| delivery_time_id | integer    | null: false |
+| price            | integer    | null: false |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -37,10 +38,10 @@
 
 ## orders table
 
-| Column  | Type       | Options                        |
-|---------|------------|--------------------------------|
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+|--------|------------|--------------------------------|
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -57,8 +58,8 @@
 | municipalities | string     | null: false |
 | street_address | string     | null: false |
 | building_name  | string     |             |
-| phone_number   | string     | null: false, unique: true |
-| oder_id        | references | null: false, foreign_key: true |
+| phone_number   | string     | null: false |
+| order          | references | null: false, foreign_key: true |
 
 ### Association
 
