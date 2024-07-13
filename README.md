@@ -11,10 +11,7 @@
 | lastname_kana      | string | null: false                |
 | firstname          | string | null: false                |
 | firstname_kana     | string | null: false                |
-| birthday_y_id      | string | null: false                |
-| birthday_m_id      | string | null: false                |
-| birthday_d_id      | string | null: false                |
-
+| birthday           | date   | null: false                |
 
 ### Association
 
@@ -25,7 +22,6 @@
 | Column           | Type    | Options     |
 |------------------|---------|-------------|
 | name             | string  | null: false |
-| image            | text    | null: false |
 | text             | text    | null: false |
 | category_id      | integer | null: false |
 | condition_id     | integer | null: false |
@@ -41,25 +37,28 @@
 
 ## orders table
 
-| Column | Type | Options |
-|--------|------|---------|
+| Column  | Type       | Options                        |
+|---------|------------|--------------------------------|
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :user
+- belongs_to :item
 - has_one :address
 
 ## address table
 
-| Column         | Type    | Options     |
-|----------------|---------|-------------|
-| postalcode     | integer | null: false |
-| prefectures_id | integer | null: false |
-| municipalities | integer | null: false |
-| street_address | string  | null: false |
-| building_name  | string  |             |
-| phone_number   | string  | null: false, unique: true |
+| Column         | Type       | Options     |
+|----------------|------------|-------------|
+| postalcode     | string     | null: false |
+| prefectures_id | integer    | null: false |
+| municipalities | string     | null: false |
+| street_address | string     | null: false |
+| building_name  | string     |             |
+| phone_number   | string     | null: false, unique: true |
+| oder_id        | references | null: false, foreign_key: true |
 
 ### Association
 
