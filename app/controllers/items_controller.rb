@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_signin, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.all.order('created_at DESC')
   end
@@ -34,6 +34,15 @@ class ItemsController < ApplicationController
       redirect_to item_path(params[:id])
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @item.user == current_user
+      @item.destroy
+      redirect_to root_path
+    else
+      redirect_to item_path(params[:id])
     end
   end
 
