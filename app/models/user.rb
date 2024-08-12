@@ -7,7 +7,8 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
     # passwordは半角英数字
-    with_options format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'is invalid. Include both letters and numbers' } do
+    with_options format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i,
+                           message: 'is invalid. Include both letters and numbers' } do
       validates :password
     end
     # lastname, firstnameは全角入力
@@ -21,4 +22,6 @@ class User < ApplicationRecord
       validates :firstname_kana
     end
   end
+
+  has_many :items
 end
