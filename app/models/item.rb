@@ -20,10 +20,8 @@ class Item < ApplicationRecord
       validates :text
     end
 
-    with_options format: { with: /\A[0-9]+\z/ } do
-      with_options numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 } do
-        validates :price
-      end
+    with_options numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 } do
+      validates :price
     end
   end
   validates :category_id, :condition_id, :shipping_id, :prefecture_id, :delivery_time_id,

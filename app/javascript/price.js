@@ -4,10 +4,11 @@ function price (){
     const priceVal = itemPrice.value;
     const addTaxPrice  = document.getElementById("add-tax-price");
     const tax = 10 / 100
-    addTaxPrice .innerHTML = Math.round(priceVal * tax);
+    addTaxPrice .innerHTML = Math.floor(priceVal * tax);
     const profit  = document.getElementById("profit");
-    profit .innerHTML = Math.round(priceVal - priceVal * tax);
+    profit .innerHTML = Math.floor(priceVal - priceVal * tax);
   });
 };
 
-window.addEventListener('turbo:load', price);
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
