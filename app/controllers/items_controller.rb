@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_signin, except: :index
 
   def index
-    # @items = Item.all
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
