@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   def index
-    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @item = Item.find(params[:item_id])
-    @orderaddress = OrderAddress.new
+    if user_signed_in? && @item.user != current_user && @item.order.blank?
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+      @orderaddress = OrderAddress.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
