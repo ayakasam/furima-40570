@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :set_item, only: [:index, :create]
   def index
-    @item = Item.find(params[:item_id])
     if user_signed_in? && @item.user != current_user && @item.order.blank?
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       @orderaddress = OrderAddress.new
@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @orderaddress = OrderAddress.new(order_params)
     if @orderaddress.valid?
       pay_item
@@ -19,12 +18,15 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-      @item = Item.find(params[:item_id])
+      set_item
       render :index, status: :unprocessable_entity
     end
   end
 
   private
+  def set_item
+      @item = Item.find(params[:item_id])
+  end
 
   def order_params
     params.require(:order_address).permit(:postalcode, :prefecture_id, :municipalities, :street_address, :building_name,

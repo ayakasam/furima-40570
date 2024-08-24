@@ -11,7 +11,7 @@ class OrderAddress
     validates :municipalities
     validates :street_address
     with_options format: { with: /\A[0-9]+\z/, message: 'is invalid. Input only number' } do
-        validates :phone_number, length: { minimum: 10, maximum: 11, message: "is too short"}
+        validates :phone_number, length: {in: 10..11}
     end
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
