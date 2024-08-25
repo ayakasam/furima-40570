@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       @orderaddress = OrderAddress.new
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
 
@@ -24,8 +24,9 @@ class OrdersController < ApplicationController
   end
 
   private
+
   def set_item
-      @item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
   end
 
   def order_params
